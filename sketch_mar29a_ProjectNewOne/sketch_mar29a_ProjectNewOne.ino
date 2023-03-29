@@ -1,67 +1,36 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 13
-#define NUMPIXELS 6
+#define NUM_LEDS 6
 
-Adafruit_NeoPixel pixels(NUMPIXELS, PIN);
+Adafruit_NeoPixel strip(NUM_LEDS, PIN);
+
 void setup() {
   Serial.begin(9600);
-  pixels.begin();
+
+  strip.begin();
+  strip.show(); // Initialize all pixels to 'off'
  
 }
 
 void loop() {
  
-  int antennae = analogRead(A0);
-  Serial.println(antennae);
+  int value = analogRead(A0);
+  Serial.println(value);
 
-  pixels.clear();
-    
+  int colorValue = map(value, 0, 1024, 0, 255);
+  int color = strip.Color(colorValue*2, 255-colorValue*2, 0);
 
-  if(antennae > 250)
-  {
-    Serial.println("RED");
+  strip.setPixelColor(0, color);
 
-    pixels.setPixelColor(0, pixels.Color(100, 0, 0)); 
-  }
-  else
-  {
-    Serial.println("GREEN");
+for (int i = 1; i < NUM_LEDS; i++) {
+  int shade = map(i, 1, NUM_LEDS-1 , 0, 255);
+   int rainbow = strip.gamma32(strip.ColorHSV(shade, 255, 255));
+    strip.setPixelColor(i, rainbow);
+   }
 
-    pixels.setPixelColor(0, pixels.Color(0, 100, 0)); 
-  }
+  strip.show();
 
-  pixels.show();
-
-  // pixels.clear();
- 
-  // for(int i=0; i<NUMPIXELS; i++) { 
-    
-  //   //map<int, int> led_change;
-  //   //led_change.insert({0, 255});
-    
-  //   //map<int, int> antennae_change;
-  //   //antennae_change.insert({0,1026});
-      
-  //   pixels.show();   
-
-  //   pixels.setPixelColor(i, pixels.Color(100, 0, 0));
-
-  //   // if (led_change.insert < 500){
-  //   //   pixels.setPixelColor(i, pixels.Color(100, 0, 0));
-
-  //   // } else {
-  //   //   pixels.setPixelColor(i, pixels.Color(0, 100, 0));
-  //   // }
-
-  //   delay(50); 
-  // }  
-
-  delay(100);
-
-//if (antenna >= 1)
-//{
-  //antenna = map(antenna, 1, 100, 1, 255);
-  //analogWrite(A0, antenna);
+  // delay(100);
 
 }
 
