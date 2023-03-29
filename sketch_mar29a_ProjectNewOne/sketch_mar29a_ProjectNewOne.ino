@@ -9,7 +9,6 @@ void setup() {
 
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
- 
 }
 
 void loop() {
@@ -20,17 +19,17 @@ void loop() {
   int colorValue = map(value, 0, 1024, 0, 255);
   int color = strip.Color(colorValue*2, 255-colorValue*2, 0);
 
-  strip.setPixelColor(0, color);
+  delay(100);
 
-for (int i = 1; i < NUM_LEDS; i++) {
-  int shade = map(i, 1, NUM_LEDS-1 , 0, 255);
-   int rainbow = strip.gamma32(strip.ColorHSV(shade, 255, 255));
-    strip.setPixelColor(i, rainbow);
-   }
+  //strip.setPixelColor(0, color);
+
+  for (int i = 0; i < NUM_LEDS; i++) {
+    strip.setPixelColor(i, color);
+  }
 
   strip.show();
 
-  // delay(100);
+  delay(100);
 
 }
 
