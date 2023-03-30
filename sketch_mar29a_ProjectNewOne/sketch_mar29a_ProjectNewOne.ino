@@ -45,32 +45,43 @@ int readPortGetColorValue(int port)
 
   Serial.println("");
 
-  int colorValue = map(value, 0, 1024, 0, 255);
-  return colorValue;
+  return value;
+}
+
+int getColorFromValue(int value)
+{
+  int red = 0;
+  int green = 0;
+  int blue = value;
+
+  int color = strip_0.Color(red, green, blue);
+
+  return color;
 }
 
 void loop() {
  
   int value_strip_0 = readPortGetColorValue(A0);
-  int color_strip_0 = strip_0.Color(value_strip_0*2, 255-value_strip_0*2, 0);
+  int color_strip_0 = getColorFromValue(value_strip_0*2);
   for (int i = 0; i < NUM_LEDS; i++) {
     strip_0.setPixelColor(i, color_strip_0);
+    
   }
 
   int value_strip_1 = readPortGetColorValue(A1);
-  int color_strip_1 = strip_0.Color(value_strip_1*2, 255-value_strip_0*1, 0);
+  int color_strip_1 = strip_0.Color(value_strip_1*2, 255-value_strip_1*1, 0);
   for (int i = 0; i < NUM_LEDS; i++) {
     strip_1.setPixelColor(i, color_strip_1);
   }
 
   int value_strip_2 = readPortGetColorValue(A2);
-  int color_strip_2 = strip_0.Color(value_strip_1*2, 255-value_strip_0*1, 0);
+  int color_strip_2 = strip_0.Color(value_strip_2*2, 255-value_strip_2*1, 0);
   for (int i = 0; i < NUM_LEDS; i++) {
     strip_2.setPixelColor(i, color_strip_2);
   }
 
   int value_strip_3 = readPortGetColorValue(A3);
-  int color_strip_3 = strip_0.Color(value_strip_1*2, 255-value_strip_0*1, 0);
+  int color_strip_3 = strip_0.Color(value_strip_3*2, 255-value_strip_3*1, 0);
   for (int i = 0; i < NUM_LEDS; i++) {
     strip_3.setPixelColor(i, color_strip_3);
   }
