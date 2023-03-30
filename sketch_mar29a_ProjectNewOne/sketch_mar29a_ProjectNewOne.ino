@@ -59,11 +59,16 @@ int getColorFromValue(int value)
   return color;
 }
 
+int ledLights(int number){
+
+ return 2;
+}
+
 void loop() {
  
   int value_strip_0 = readPortGetColorValue(A0);
   int color_strip_0 = getColorFromValue(value_strip_0*2);
-  for (int i = 0; i < NUM_LEDS; i++) {
+  for (int i = 0; i < ledLights(value_strip_0); i++) {
     strip_0.setPixelColor(i, color_strip_0);
     
   }
