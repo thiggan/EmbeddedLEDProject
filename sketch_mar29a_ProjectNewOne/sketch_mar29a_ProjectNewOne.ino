@@ -13,10 +13,8 @@ Adafruit_NeoPixel strip_1(NUM_LEDS, PIN_STRIP_1);
 Adafruit_NeoPixel strip_2(NUM_LEDS, PIN_STRIP_2);
 Adafruit_NeoPixel strip_3(NUM_LEDS, PIN_STRIP_3);
 
-
-
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(31250);
 
   strip_0.begin();
   strip_0.show(); 
@@ -35,69 +33,70 @@ int readPortGetColorValue(int port)
 {
   int value = analogRead(port);
 
-  Serial.print("Port '");
-  Serial.print(port);
-  Serial.print("' ");
+  // Serial.print("readPortGetColorValue ");
+  // Serial.print("Port '");
+  // Serial.print(port);
+  // Serial.print("' ");
 
-  Serial.print("value '");
-  Serial.print(value);
-  Serial.print("' ");
+  // Serial.print("value '");
+  // Serial.print(value);
+  // Serial.print("' ");
 
-  Serial.println("");
+  // Serial.println("");
 
   return value;
 }
 
-int getColorFromValue(int value)
-{
-  int red = 0;
-  int green = 0;
-  int blue = value;
-
-  int color = strip_0.Color(red, green, blue);
-
-  return color;
-}
-
 int ledLights(int number){
-  if(number > 0 && number < 200){
-    return 0;
-  }
-  else if(number > 201 && number < 340){
-    return 1;
+  int numLeds = 0;
+
+  if(number > 201 && number < 340){
+    numLeds = 1;
   }
   else if(number > 341 && number < 480){
-    return 2;
+    numLeds = 2;
   }
   else if(number > 481 && number < 620){
-    return 3;
+    numLeds = 3;
   }
   else if( number > 621 && number < 750){
-    return 4;
+    numLeds = 4;
   }
   else if(number > 751 && number < 890){
-    return 5;
+    numLeds = 5;
   }
   else if(number > 891){
-    return 6;
+    numLeds = 6;
   }
-    
-  
 
+  Serial.print("ledLights ");
+  Serial.print("numLeds '");
+  Serial.print(numLeds);
+  Serial.print("' ");
+
+  Serial.println("");
+
+  return numLeds;
 }
 
-
 void loop() {
- 
+
   int value_strip_0 = readPortGetColorValue(A0);
-  int color_strip_0 = getColorFromValue(value_strip_0);
-  for (int i = 0; i < ledLights(value_strip_0)-1; i++) {
-    strip_0.setPixelColor(i, color_strip_0);
+  int leds = ledLights(value_strip_0);
+  for (int i = 0; i < NUM_LEDS; i++) {
+    if(i <= leds)
+    {
+      strip_0.setPixelColor(i, strip_0.Color(75, 0, 0));
+    }
+    else
+    {
+      strip_0.setPixelColor(i, strip_0.Color(0, 75, 0));
+    }
   }
 
-  // strip_0.setPixelColor(0, strip_0.Color(255, 0, 0));
-  // strip_0.setPixelColor(1, strip_0.Color(0, 255, 0));
-  // strip_0.setPixelColor(2, strip_0.Color(0, 0, 255));
+  // strip_0.setPixelColor(0, strip_0.Color(255, 0, 0)); // red
+  // strip_0.setPixelColor(1, strip_0.Color(0, 255, 0)); // green
+  // strip_0.setPixelColor(2, strip_0.Color(0, 0, 255)); // blue
 
   // int value_strip_1 = readPortGetColorValue(A1);
   // int color_strip_1 = strip_0.Color(value_strip_1*2, 255-value_strip_1*1, 0);
@@ -123,7 +122,7 @@ void loop() {
   //strip_2.show();
   //strip_3.show();
 
-
+  delay(50);
 
 }
 
