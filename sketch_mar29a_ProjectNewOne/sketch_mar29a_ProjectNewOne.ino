@@ -19,14 +19,14 @@ void setup() {
   strip_0.begin();
   strip_0.show(); 
 
-  // strip_1.begin();
-  // strip_1.show(); 
+  strip_1.begin();
+  strip_1.show(); 
 
-  // strip_2.begin();
-  // strip_2.show(); 
+  strip_2.begin();
+  strip_2.show(); 
 
-  //  strip_3.begin();
-  //  strip_3.show(); 
+  strip_3.begin();
+  strip_3.show(); 
 }
 
 int readPortGetColorValue(int port)
@@ -69,12 +69,12 @@ int ledLights(int number){
     numLeds = 6;
   }
 
-  Serial.print("ledLights ");
-  Serial.print("numLeds '");
-  Serial.print(numLeds);
-  Serial.print("' ");
+  // Serial.print("ledLights ");
+  // Serial.print("numLeds '");
+  // Serial.print(numLeds);
+  // Serial.print("' ");
 
-  Serial.println("");
+  // Serial.println("");
 
   return numLeds;
 }
@@ -82,45 +82,61 @@ int ledLights(int number){
 void loop() {
 
   int value_strip_0 = readPortGetColorValue(A0);
-  int leds = ledLights(value_strip_0);
+  int leds_strip_0 = ledLights(value_strip_0);
   for (int i = 0; i < NUM_LEDS; i++) {
-    if(i <= leds)
+    if(i <= leds_strip_0)
     {
-      strip_0.setPixelColor(i, strip_0.Color(75, 0, 0));
+      strip_0.setPixelColor(i, strip_0.Color(100, 0, 0));
     }
     else
     {
-      strip_0.setPixelColor(i, strip_0.Color(0, 75, 0));
+      strip_0.setPixelColor(i, strip_0.Color(100, 0, 100));
     }
   }
 
-  // strip_0.setPixelColor(0, strip_0.Color(255, 0, 0)); // red
-  // strip_0.setPixelColor(1, strip_0.Color(0, 255, 0)); // green
-  // strip_0.setPixelColor(2, strip_0.Color(0, 0, 255)); // blue
+  int value_strip_1 = readPortGetColorValue(A1);
+  int leds_strip_1 = ledLights(value_strip_1);
+  for (int i = 0; i < NUM_LEDS; i++) {
+    if(i <= leds_strip_1)
+    {
+      strip_1.setPixelColor(i, strip_1.Color(100, 0, 0));
+    }
+    else
+    {
+      strip_1.setPixelColor(i, strip_1.Color(100, 0, 100));
+    }
+  }
 
-  // int value_strip_1 = readPortGetColorValue(A1);
-  // int color_strip_1 = strip_0.Color(value_strip_1*2, 255-value_strip_1*1, 0);
-  // for (int i = 0; i < NUM_LEDS; i++) {
-  //   strip_1.setPixelColor(i, color_strip_1);
-  // }
+  int value_strip_2 = readPortGetColorValue(A2);
+  int leds_strip_2 = ledLights(value_strip_2);
+  for (int i = 0; i < NUM_LEDS; i++) {
+    if(i <= leds_strip_2)
+    {
+      strip_2.setPixelColor(i, strip_2.Color(100, 0, 0));
+    }
+    else
+    {
+      strip_2.setPixelColor(i, strip_2.Color(100, 0, 100));
+    }
+  }
 
-  // int value_strip_2 = readPortGetColorValue(A2);
-  // int color_strip_2 = strip_0.Color(value_strip_2*2, 255-value_strip_2*1, 0);
-  // for (int i = 0; i < NUM_LEDS; i++) {
-  //   strip_2.setPixelColor(i, color_strip_2);
-  // }
-
-  // int value_strip_3 = readPortGetColorValue(A3);
-  // int color_strip_3 = strip_0.Color(value_strip_3*2, 255-value_strip_3*1, 0);
-  // for (int i = 0; i < NUM_LEDS; i++) {
-  //   strip_3.setPixelColor(i, color_strip_3);
-  // }
-
+  int value_strip_3 = readPortGetColorValue(A3);
+  int leds_strip_3 = ledLights(value_strip_3);
+  for (int i = 0; i < NUM_LEDS; i++) {
+    if(i <= leds_strip_3)
+    {
+      strip_3.setPixelColor(i, strip_3.Color(100, 0, 0));
+    }
+    else
+    {
+      strip_3.setPixelColor(i, strip_3.Color(100, 0, 100));
+    }
+  }
 
   strip_0.show();
-  //strip_1.show();
-  //strip_2.show();
-  //strip_3.show();
+  strip_1.show();
+  strip_2.show();
+  strip_3.show();
 
   delay(50);
 
