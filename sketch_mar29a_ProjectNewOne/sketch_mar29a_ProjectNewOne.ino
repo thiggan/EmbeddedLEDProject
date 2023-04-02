@@ -8,13 +8,13 @@
 #define NUM_LEDS 6
 
 // todo : figure out how to put these in an array
-Adafruit_NeoPixel strip_0(NUM_LEDS, PIN_STRIP_0);
+Adafruit_NeoPixel strip_0(NUM_LEDS, PIN_STRIP_0); //setting the strips and passing in the number of LEDs. 
 Adafruit_NeoPixel strip_1(NUM_LEDS, PIN_STRIP_1);
 Adafruit_NeoPixel strip_2(NUM_LEDS, PIN_STRIP_2);
 Adafruit_NeoPixel strip_3(NUM_LEDS, PIN_STRIP_3);
 
 void setup() {
-  Serial.begin(31250);
+  Serial.begin(9600); 
 
   strip_0.begin();
   strip_0.show(); 
@@ -33,16 +33,16 @@ int readPortGetColorValue(int port)
 {
   int value = analogRead(port);
 
-  // Serial.print("readPortGetColorValue ");
-  // Serial.print("Port '");
-  // Serial.print(port);
-  // Serial.print("' ");
+  Serial.print("readPortGetColorValue ");
+  Serial.print("Port '");
+  Serial.print(port);
+  Serial.print("' ");
 
-  // Serial.print("value '");
-  // Serial.print(value);
-  // Serial.print("' ");
+  Serial.print("value '");
+  Serial.print(value);
+  Serial.print("' ");
 
-  // Serial.println("");
+  Serial.println("");
 
   return value;
 }
@@ -69,12 +69,14 @@ int ledLights(int number){
     numLeds = 6;
   }
 
-  // Serial.print("ledLights ");
-  // Serial.print("numLeds '");
-  // Serial.print(numLeds);
-  // Serial.print("' ");
+//this if statement is setting the strips to different values and with the different value readings showing a different number of lights. 
 
-  // Serial.println("");
+  Serial.print("ledLights ");
+  Serial.print("numLeds '");
+  Serial.print(numLeds);
+  Serial.print("' ");
+
+  Serial.println("");
 
   return numLeds;
 }
@@ -86,24 +88,24 @@ void loop() {
   for (int i = 0; i < NUM_LEDS; i++) {
     if(i <= leds_strip_0)
     {
-      strip_0.setPixelColor(i, strip_0.Color(100, 0, 0));
+      strip_0.setPixelColor(i, strip_0.Color(255, 0, 0));
     }
     else
     {
-      strip_0.setPixelColor(i, strip_0.Color(100, 0, 100));
+      strip_0.setPixelColor(i, strip_0.Color(0, 0, 255));
     }
   }
-
+// The lights are set to Red and Green - Red being the high number and Blue being the low number. 
   int value_strip_1 = readPortGetColorValue(A1);
   int leds_strip_1 = ledLights(value_strip_1);
   for (int i = 0; i < NUM_LEDS; i++) {
     if(i <= leds_strip_1)
     {
-      strip_1.setPixelColor(i, strip_1.Color(100, 0, 0));
+      strip_1.setPixelColor(i, strip_1.Color(255, 0, 0));
     }
     else
     {
-      strip_1.setPixelColor(i, strip_1.Color(100, 0, 100));
+      strip_1.setPixelColor(i, strip_1.Color(0, 0, 255));
     }
   }
 
@@ -112,11 +114,11 @@ void loop() {
   for (int i = 0; i < NUM_LEDS; i++) {
     if(i <= leds_strip_2)
     {
-      strip_2.setPixelColor(i, strip_2.Color(100, 0, 0));
+      strip_2.setPixelColor(i, strip_2.Color(255, 0, 0));
     }
     else
     {
-      strip_2.setPixelColor(i, strip_2.Color(100, 0, 100));
+      strip_2.setPixelColor(i, strip_2.Color(0, 0, 255));
     }
   }
 
@@ -125,11 +127,11 @@ void loop() {
   for (int i = 0; i < NUM_LEDS; i++) {
     if(i <= leds_strip_3)
     {
-      strip_3.setPixelColor(i, strip_3.Color(100, 0, 0));
+      strip_3.setPixelColor(i, strip_3.Color(255, 0, 0));
     }
     else
     {
-      strip_3.setPixelColor(i, strip_3.Color(100, 0, 100));
+      strip_3.setPixelColor(i, strip_3.Color(0, 0, 255));
     }
   }
 
@@ -138,7 +140,7 @@ void loop() {
   strip_2.show();
   strip_3.show();
 
-  delay(50);
+  delay(500);
 
 }
 
